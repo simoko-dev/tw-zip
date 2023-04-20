@@ -52,7 +52,7 @@ function getDistricts(city: string): IDistrict {
 }
 
 /**
- * 回傳扁平化資料
+ * 回傳扁平化陣列資訊
  * @param city 縣市名稱 (可選，預設回傳所有縣市)
  * @param symbol 分隔符號 (可選，預設為`空格符`)
  * @example
@@ -66,4 +66,15 @@ function getFlatArray({ city = '', symbol = ' ' } = {}): string[] {
   return Object.entries(data).filter(x => city ? x[0] === city : true).flatMap(([k1, v1]) => Object.entries(v1).flatMap(([k2, v2]) => `${v2}${symbol}${k1}${symbol}${k2}`))
 }
 
-export default { getData, getCityArray, getDistricts, getFlatArray }
+/**
+ * 根據行政區回傳郵遞區號
+ * @param district 行政區名稱
+ * @example
+ * getZipCode('中正區')
+ * // return ['100', '台北市', '中正區']
+ */
+function getZipCode(district: string) {
+  return getFlatArray().find(x => x.endsWith(district))?.split(' ')
+}
+
+export default { getData, getCityArray, getDistricts, getFlatArray, getZipCode }
