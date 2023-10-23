@@ -1,8 +1,6 @@
 {
   "name": "@simoko/tw-zip",
-  "type": "module",
-  "version": "0.0.1",
-  "packageManager": "pnpm@8.3.0",
+  "version": "0.0.2",
   "description": "taiwan zip code",
   "author": "Supra <supra126@gmail.com>",
   "license": "MIT",
@@ -12,54 +10,31 @@
   },
   "exports": {
     ".": {
+      "require": "./dist/index.js",
       "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
+      "browser": "./dist/index.global.js"
     }
   },
-  "main": "./dist/index.cjs",
+  "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "typesVersions": {
-    "*": {
-      "*": [
-        "./dist/*",
-        "./dist/index.d.ts"
-      ]
-    }
-  },
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "unbuild",
-    "dev": "unbuild --stub",
+    "build": "rimraf dist && tsup",
     "lint": "eslint .",
-    "prepublishOnly": "nr build",
-    "release": "bumpp && npm publish",
-    "start": "esno src/index.ts",
-    "test": "vitest",
+    "release": "npx bumpp && npm publish",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.38.5",
-    "@antfu/ni": "^0.21.3",
-    "@antfu/utils": "^0.7.2",
     "@types/node": "^18.15.12",
-    "bumpp": "^9.1.0",
+    "@types/react": "^18.2.31",
     "eslint": "^8.38.0",
-    "esno": "^0.16.3",
-    "lint-staged": "^13.2.1",
-    "pnpm": "^8.3.1",
-    "rimraf": "^4.4.1",
-    "simple-git-hooks": "^2.8.1",
-    "typescript": "^5.0.4",
-    "unbuild": "^1.2.1",
-    "vitest": "^0.29.8"
-  },
-  "simple-git-hooks": {
-    "pre-commit": "pnpm lint-staged"
-  },
-  "lint-staged": {
-    "*": "eslint --fix"
+    "react": "^18.2.0",
+    "rimraf": "^5.0.5",
+    "tsup": "^7.2.0",
+    "typescript": "^5.0.4"
   }
 }
