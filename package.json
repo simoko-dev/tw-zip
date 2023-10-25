@@ -1,0 +1,80 @@
+{
+  "name": "@simoko/tw-zip",
+  "version": "0.1.2",
+  "description": "taiwan zip code",
+  "keywords": [
+    "taiwan",
+    "zipcode"
+  ],
+  "author": "Supra <supra126@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simoko-dev/tw-zip"
+  },
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "browser": "./dist/index.global.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./react": {
+      "require": "./dist/react/index.js",
+      "import": "./dist/react/index.mjs",
+      "browser": "./dist/react/index.global.js",
+      "types": "./dist/react/index.d.ts"
+    },
+    "./vue": {
+      "require": "./dist/vue/index.js",
+      "import": "./dist/vue/index.mjs",
+      "browser": "./dist/vue/index.global.js",
+      "types": "./dist/vue/index.d.ts"
+    }
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./dist/index.d.ts"
+      ],
+      "react": [
+        "./dist/react/*",
+        "./dist/react/index.d.ts"
+      ],
+      "vue": [
+        "./dist/vue/*",
+        "./dist/vue/index.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rimraf dist && tsup",
+    "test": "vitest",
+    "lint": "eslint .",
+    "release": "npx bumpp && npm publish --access public",
+    "typecheck": "tsc --noEmit",
+    "doc": "rimraf docs && typedoc --plugin typedoc-plugin-markdown"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.38.5",
+    "@types/node": "^18.15.12",
+    "@types/react": "^18.2.31",
+    "@types/react-dom": "^18.2.14",
+    "eslint": "^8.38.0",
+    "rimraf": "^5.0.5",
+    "tsdoc-markdown": "^0.1.0",
+    "tsup": "^7.2.0",
+    "typescript": "^5.0.4",
+    "vitest": "^0.34.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "vue": "^3.3.7"
+  }
+}
