@@ -68,14 +68,18 @@ function getFlatArray({ city = '', symbol = ' ' } = {}): string[] {
 }
 
 /**
- * 根據行政區回傳郵遞區號
+ * 根據行政區回傳單筆資料
  * @param district 行政區名稱
  * @example
  * getZipCode("中正區")
  * // [ "100", "台北市", "中正區" ]
+ * getZipCode("100")
+ * // [ "100", "台北市", "中正區" ]
  */
 function getZipCode(district: string) {
-  return getFlatArray().find(x => x.endsWith(district))?.split(' ')
+  if (/^\s*\d+\s*$/.test(district))
+    return getFlatArray().find(x => x.startsWith(`${district.trim()} `))?.split(' ')
+  return getFlatArray().find(x => x.endsWith(district.trim()))?.split(' ')
 }
 
 export { getData, getCityArray, getDistricts, getDistrictArray, getFlatArray, getZipCode }

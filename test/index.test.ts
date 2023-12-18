@@ -30,3 +30,7 @@ test('getFlatArray', () => {
 test('getZipCode', () => {
   expect(getZipCode('三民區')).toEqual(['807', '高雄市', '三民區'])
 })
+
+test('getZipCode', () => {
+  expect(getZipCode('807')).toEqual(['807', '高雄市', '三民區'])
+})
