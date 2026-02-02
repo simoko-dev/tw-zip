@@ -5,7 +5,7 @@
 
 台灣縣市、行政區、郵遞區號（3碼／6碼）查詢工具，支援 React / Vue / 原生 JS。
 
-**[▶ 線上試用 React](https://stackblitz.com/github/supra126/tw-zip/tree/main/playground/react?file=src%2FApp.tsx)** · **[▶ 線上試用 Vue](https://stackblitz.com/github/supra126/tw-zip/tree/main/playground/vue?file=src%2FApp.vue)**
+**[▶ 線上試用 React](https://supra126.github.io/tw-zip/react/)** · **[▶ 線上試用 Vue](https://supra126.github.io/tw-zip/vue/)**
 
 ## 安裝
 
@@ -39,7 +39,7 @@ function App() {
         {cities.map(c => <option key={c}>{c}</option>)}
       </select>
       <select value={district} onChange={e => setDistrict(e.target.value)}>
-        {districts.map(d => <option key={d.value}>{d.label}</option>)}
+        {districts.map(d => <option key={d.label}>{d.label}</option>)}
       </select>
       <p>郵遞區號：{zipCode}</p>
     </>
@@ -52,15 +52,15 @@ function App() {
 ```vue
 <script setup>
 import { useTwZip } from '@simoko/tw-zip/vue'
-const { cities, city, districts, zipCode } = useTwZip()
+const { cities, city, districts, district, zipCode } = useTwZip()
 </script>
 
 <template>
   <select v-model="city">
     <option v-for="c in cities" :key="c">{{ c }}</option>
   </select>
-  <select v-model="zipCode">
-    <option v-for="d in districts" :key="d.value" :value="d.value">{{ d.label }}</option>
+  <select v-model="district">
+    <option v-for="d in districts" :key="d.label">{{ d.label }}</option>
   </select>
   <p>郵遞區號：{{ zipCode }}</p>
 </template>

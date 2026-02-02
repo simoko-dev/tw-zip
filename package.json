@@ -1,7 +1,7 @@
 {
   "name": "@simoko/tw-zip",
   "type": "module",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "台灣縣市、行政區、郵遞區號（3碼/6碼）查詢工具，支援 React/Vue hooks",
   "author": "Supra <supra126@gmail.com>",
   "license": "MIT",
