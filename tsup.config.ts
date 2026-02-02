@@ -1,7 +1,15 @@
 import { defineConfig } from 'tsup'
 
 export default defineConfig({
-  entry: ['src/index.ts', 'src/react/index.ts', 'src/vue/index.ts'],
+  entry: [
+    'src/index.ts',
+    'src/react/index.ts',
+    'src/react/lazy.ts',
+    'src/vue/index.ts',
+    'src/vue/lazy.ts',
+    'src/zip6/index.ts',
+    'src/zip6/loader.ts',
+  ],
   dts: true,
   treeshake: true,
   skipNodeModulesBundle: true,
@@ -9,5 +17,5 @@ export default defineConfig({
   minify: true,
   bundle: true,
   clean: true,
-  format: ['cjs', 'esm', 'iife'],
+  format: ['cjs', 'esm'],
 })

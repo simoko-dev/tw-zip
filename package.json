@@ -1,39 +1,71 @@
 {
   "name": "@simoko/tw-zip",
-  "version": "0.1.4",
-  "description": "taiwan zip code",
-  "keywords": [
-    "taiwan",
-    "zipcode"
-  ],
+  "type": "module",
+  "version": "1.0.1",
+  "description": "台灣縣市、行政區、郵遞區號（3碼/6碼）查詢工具，支援 React/Vue hooks",
   "author": "Supra <supra126@gmail.com>",
   "license": "MIT",
+  "homepage": "https://github.com/supra126/tw-zip#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/simoko-dev/tw-zip"
+    "url": "git+https://github.com/supra126/tw-zip"
   },
+  "bugs": {
+    "url": "https://github.com/supra126/tw-zip/issues"
+  },
+  "keywords": [
+    "taiwan",
+    "zipcode",
+    "postal-code",
+    "address",
+    "taiwan-zipcode",
+    "tw-zip",
+    "3+3",
+    "6-digit",
+    "react",
+    "vue",
+    "hooks"
+  ],
+  "sideEffects": false,
   "exports": {
     ".": {
-      "require": "./dist/index.js",
-      "import": "./dist/index.mjs",
-      "browser": "./dist/index.global.js",
-      "types": "./dist/index.d.ts"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     },
     "./react": {
-      "require": "./dist/react/index.js",
-      "import": "./dist/react/index.mjs",
-      "browser": "./dist/react/index.global.js",
-      "types": "./dist/react/index.d.ts"
+      "types": "./dist/react/index.d.ts",
+      "import": "./dist/react/index.js",
+      "require": "./dist/react/index.cjs"
     },
     "./vue": {
-      "require": "./dist/vue/index.js",
-      "import": "./dist/vue/index.mjs",
-      "browser": "./dist/vue/index.global.js",
-      "types": "./dist/vue/index.d.ts"
+      "types": "./dist/vue/index.d.ts",
+      "import": "./dist/vue/index.js",
+      "require": "./dist/vue/index.cjs"
+    },
+    "./zip6": {
+      "types": "./dist/zip6/index.d.ts",
+      "import": "./dist/zip6/index.js",
+      "require": "./dist/zip6/index.cjs"
+    },
+    "./react/lazy": {
+      "types": "./dist/react/lazy.d.ts",
+      "import": "./dist/react/lazy.js",
+      "require": "./dist/react/lazy.cjs"
+    },
+    "./vue/lazy": {
+      "types": "./dist/vue/lazy.d.ts",
+      "import": "./dist/vue/lazy.js",
+      "require": "./dist/vue/lazy.cjs"
+    },
+    "./zip6/loader": {
+      "types": "./dist/zip6/loader.d.ts",
+      "import": "./dist/zip6/loader.js",
+      "require": "./dist/zip6/loader.cjs"
     }
   },
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "typesVersions": {
     "*": {
@@ -48,34 +80,63 @@
       "vue": [
         "./dist/vue/*",
         "./dist/vue/index.d.ts"
+      ],
+      "zip6": [
+        "./dist/zip6/*",
+        "./dist/zip6/index.d.ts"
+      ],
+      "react/lazy": [
+        "./dist/react/lazy.d.ts"
+      ],
+      "vue/lazy": [
+        "./dist/vue/lazy.d.ts"
+      ],
+      "zip6/loader": [
+        "./dist/zip6/loader.d.ts"
       ]
     }
   },
   "files": [
+    "data",
     "dist"
   ],
   "scripts": {
-    "build": "rimraf dist && tsup",
+    "build": "tsup",
     "test": "vitest",
     "lint": "eslint .",
     "release": "npx bumpp && npm publish --access public",
-    "typecheck": "tsc --noEmit",
-    "doc": "rimraf docs && typedoc --plugin typedoc-plugin-markdown"
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "vue": ">=3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "vue": {
+      "optional": true
+    }
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.38.5",
-    "@types/node": "^18.15.12",
-    "@types/react": "^18.2.31",
-    "@types/react-dom": "^18.2.14",
-    "eslint": "^8.38.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "rimraf": "^5.0.5",
-    "tsup": "^7.2.0",
-    "typedoc": "^0.25.4",
-    "typedoc-plugin-markdown": "^3.17.1",
-    "typescript": "^5.0.4",
-    "vitest": "^0.34.6",
-    "vue": "^3.3.7"
+    "@eslint/js": "^9.28.0",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/node": "^22.15.29",
+    "@types/react": "^19.2.10",
+    "@types/react-dom": "^19.2.3",
+    "@vue/test-utils": "^2.4.6",
+    "eslint": "^9.28.0",
+    "eslint-plugin-vue": "^10.2.0",
+    "jsdom": "^27.4.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "tsup": "^8.5.1",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.34.0",
+    "vitest": "^3.2.4",
+    "vue": "^3.5.17",
+    "vue-eslint-parser": "^10.2.0"
   }
 }
