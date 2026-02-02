@@ -36,7 +36,7 @@ function getCityArray(): string[] {
  * // { "中正區": "100", "大同區": "103", ... }
  */
 function getDistricts(city?: string): IDistrict {
-  return Object.entries(data).filter(x => city ? x[0] === city : true).flatMap(([, v1]) => v1).reduce((t, r) => Object.assign({ ...t, ...r }))
+  return Object.entries(data).filter(x => city ? x[0] === city : true).flatMap(([, v1]) => v1).reduce((t, r) => Object.assign({ ...t, ...r }), {} as IDistrict)
 }
 
 /**
