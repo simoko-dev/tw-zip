@@ -1,8 +1,8 @@
 {
   "name": "@simoko/tw-zip",
   "type": "module",
-  "version": "1.0.2",
-  "description": "台灣縣市、行政區、郵遞區號（3碼/6碼）查詢工具，支援 React/Vue hooks",
+  "version": "1.1.0",
+  "description": "台灣縣市、行政區、郵遞區號（3碼/6碼）查詢工具，支援 React/Vue/Svelte/SolidJS/Angular",
   "author": "Supra <supra126@gmail.com>",
   "license": "MIT",
   "homepage": "https://github.com/supra126/tw-zip#readme",
@@ -24,9 +24,15 @@
     "6-digit",
     "react",
     "vue",
+    "svelte",
+    "solidjs",
+    "angular",
     "hooks"
   ],
   "sideEffects": false,
+  "workspaces": [
+    "playground/*"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -62,6 +68,36 @@
       "types": "./dist/zip6/loader.d.ts",
       "import": "./dist/zip6/loader.js",
       "require": "./dist/zip6/loader.cjs"
+    },
+    "./svelte": {
+      "types": "./dist/svelte/index.d.ts",
+      "import": "./dist/svelte/index.js",
+      "require": "./dist/svelte/index.cjs"
+    },
+    "./svelte/lazy": {
+      "types": "./dist/svelte/lazy.d.ts",
+      "import": "./dist/svelte/lazy.js",
+      "require": "./dist/svelte/lazy.cjs"
+    },
+    "./solidjs": {
+      "types": "./dist/solidjs/index.d.ts",
+      "import": "./dist/solidjs/index.js",
+      "require": "./dist/solidjs/index.cjs"
+    },
+    "./solidjs/lazy": {
+      "types": "./dist/solidjs/lazy.d.ts",
+      "import": "./dist/solidjs/lazy.js",
+      "require": "./dist/solidjs/lazy.cjs"
+    },
+    "./angular": {
+      "types": "./dist/angular/index.d.ts",
+      "import": "./dist/angular/index.js",
+      "require": "./dist/angular/index.cjs"
+    },
+    "./angular/lazy": {
+      "types": "./dist/angular/lazy.d.ts",
+      "import": "./dist/angular/lazy.js",
+      "require": "./dist/angular/lazy.cjs"
     }
   },
   "main": "./dist/index.cjs",
@@ -93,6 +129,27 @@
       ],
       "zip6/loader": [
         "./dist/zip6/loader.d.ts"
+      ],
+      "svelte": [
+        "./dist/svelte/*",
+        "./dist/svelte/index.d.ts"
+      ],
+      "svelte/lazy": [
+        "./dist/svelte/lazy.d.ts"
+      ],
+      "solidjs": [
+        "./dist/solidjs/*",
+        "./dist/solidjs/index.d.ts"
+      ],
+      "solidjs/lazy": [
+        "./dist/solidjs/lazy.d.ts"
+      ],
+      "angular": [
+        "./dist/angular/*",
+        "./dist/angular/index.d.ts"
+      ],
+      "angular/lazy": [
+        "./dist/angular/lazy.d.ts"
       ]
     }
   },
@@ -103,12 +160,18 @@
   "scripts": {
     "build": "tsup",
     "test": "vitest",
+    "bench": "vitest bench",
     "lint": "eslint .",
     "release": "npx bumpp && npm publish --access public",
-    "typecheck": "tsc --noEmit"
+    "release:jsr": "node -e \"const p=require('./package.json'),d=require('./deno.json');d.version=p.version;require('fs').writeFileSync('deno.json',JSON.stringify(d,null,2)+'\\n')\" && deno publish",
+    "typecheck": "tsc --noEmit",
+    "prepare": "husky"
   },
   "peerDependencies": {
+    "@angular/core": ">=16.0.0",
     "react": ">=16.8.0",
+    "solid-js": ">=1.0.0",
+    "svelte": ">=3.0.0",
     "vue": ">=3.0.0"
   },
   "peerDependenciesMeta": {
@@ -117,26 +180,45 @@
     },
     "vue": {
       "optional": true
+    },
+    "svelte": {
+      "optional": true
+    },
+    "solid-js": {
+      "optional": true
+    },
+    "@angular/core": {
+      "optional": true
     }
   },
   "devDependencies": {
+    "@angular/core": "^21.1.2",
     "@eslint/js": "^9.28.0",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/react": "^16.3.2",
-    "@types/node": "^22.15.29",
+    "@types/node": "^25.2.0",
     "@types/react": "^19.2.10",
     "@types/react-dom": "^19.2.3",
     "@vue/test-utils": "^2.4.6",
     "eslint": "^9.28.0",
     "eslint-plugin-vue": "^10.2.0",
-    "jsdom": "^27.4.0",
+    "husky": "^9.1.7",
+    "jsdom": "^28.0.0",
+    "lint-staged": "^16.2.7",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
+    "solid-js": "^1.9.11",
+    "svelte": "^5.49.1",
     "tsup": "^8.5.1",
-    "typescript": "^5.8.3",
+    "typescript": "^5.9.3",
     "typescript-eslint": "^8.34.0",
-    "vitest": "^3.2.4",
+    "vitest": "^4.0.18",
     "vue": "^3.5.17",
     "vue-eslint-parser": "^10.2.0"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,vue,svelte}": [
+      "eslint --fix"
+    ]
   }
 }

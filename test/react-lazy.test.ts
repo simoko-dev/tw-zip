@@ -67,10 +67,16 @@ afterEach(() => {
 })
 
 describe('useTwZip6 (React Lazy)', () => {
-  it('應返回初始載入狀態', () => {
+  it('應返回初始載入狀態', async () => {
     const { result } = renderHook(() => useTwZip6())
 
+    // 檢查初始狀態為載入中
     expect(result.current.loading).toBe(true)
+
+    // 等待異步操作完成以避免 act() 警告
+    await waitFor(() => {
+      expect(result.current.loading).toBe(false)
+    })
   })
 
   it('應在載入完成後返回縣市列表', async () => {

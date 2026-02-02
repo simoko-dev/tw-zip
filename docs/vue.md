@@ -25,7 +25,7 @@ const {
   </select>
 
   <select v-model="district">
-    <option v-for="d in districts" :key="d.label">{{ d.label }}</option>
+    <option v-for="d in districts" :key="d.label" :value="d.label">{{ d.label }}</option>
   </select>
 
   <p>郵遞區號：{{ zipCode }}</p>
