@@ -30,34 +30,41 @@ jobs:
           node-version: 20
           cache: npm
 
-      - name: Install root dependencies
+      - name: Install dependencies (workspaces)
         run: npm ci --legacy-peer-deps
 
       - name: Build library
         run: npm run build
 
-      - name: Install React playground dependencies
-        working-directory: playground/react
-        run: npm install
-
       - name: Build React playground
         working-directory: playground/react
         run: npm run build
-
-      - name: Install Vue playground dependencies
-        working-directory: playground/vue
-        run: npm install
 
       - name: Build Vue playground
         working-directory: playground/vue
         run: npm run build
 
+      - name: Build Svelte playground
+        working-directory: playground/svelte
+        run: npm run build
+
+      - name: Build SolidJS playground
+        working-directory: playground/solidjs
+        run: npm run build
+
+      - name: Build Angular playground
+        working-directory: playground/angular
+        run: npm run build
+
       - name: Prepare deploy folder
         run: |
-          mkdir -p deploy/react deploy/vue
+          mkdir -p deploy/react deploy/vue deploy/svelte deploy/solidjs deploy/angular
           cp playground/home/index.html deploy/
           cp -r playground/react/dist/* deploy/react/
           cp -r playground/vue/dist/* deploy/vue/
+          cp -r playground/svelte/dist/* deploy/svelte/
+          cp -r playground/solidjs/dist/* deploy/solidjs/
+          cp -r playground/angular/dist/* deploy/angular/
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

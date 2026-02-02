@@ -1,9 +1,25 @@
+/**
+ * @module @simoko/tw-zip/vue
+ * @description Vue Composable 版本的台灣郵遞區號查詢工具
+ */
+
 import { computed, ref, watch } from 'vue'
 import { getCityArray, getDistrictArray } from '../'
 
 export { useTwZip6 } from './useTwZip6'
 export type { SearchResult } from './useTwZip6'
 
+/**
+ * 台灣郵遞區號 Vue Composable（3碼）
+ * @returns 縣市、行政區、郵遞區號的響應式狀態
+ * @example
+ * ```vue
+ * <script setup>
+ * import { useTwZip } from '@simoko/tw-zip/vue'
+ * const { cities, city, districts, zipCode } = useTwZip()
+ * </script>
+ * ```
+ */
 export function useTwZip() {
   const cities = getCityArray()
 

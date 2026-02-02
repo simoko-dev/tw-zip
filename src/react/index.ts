@@ -1,9 +1,27 @@
+/**
+ * @module @simoko/tw-zip/react
+ * @description React Hooks 版本的台灣郵遞區號查詢工具
+ */
+
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { getCityArray, getDistrictArray } from '../'
 
 export { useTwZip6 } from './useTwZip6'
 export type { SearchResult } from './useTwZip6'
 
+/**
+ * 台灣郵遞區號 React Hook（3碼）
+ * @returns 縣市、行政區、郵遞區號的狀態與設定函數
+ * @example
+ * ```tsx
+ * import { useTwZip } from '@simoko/tw-zip/react'
+ *
+ * function AddressForm() {
+ *   const { cities, city, setCity, districts, zipCode } = useTwZip()
+ *   return <select value={city} onChange={e => setCity(e.target.value)}>...</select>
+ * }
+ * ```
+ */
 export function useTwZip() {
   const cities = useMemo(() => getCityArray(), [])
   const [city, setCity] = useState<string>(cities[0] ?? '')

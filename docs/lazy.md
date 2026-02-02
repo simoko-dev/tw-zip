@@ -8,10 +8,15 @@
 // 預設 - Bundled（完整資料）
 import { useTwZip6 } from '@simoko/tw-zip/react'
 import { useTwZip6 } from '@simoko/tw-zip/vue'
+import { createTwZip6 } from '@simoko/tw-zip/svelte'
+import { useTwZip6 } from '@simoko/tw-zip/solidjs'
 
 // Lazy - 按縣市動態載入
 import { useTwZip6 } from '@simoko/tw-zip/react/lazy'
 import { useTwZip6 } from '@simoko/tw-zip/vue/lazy'
+import { createTwZip6 } from '@simoko/tw-zip/svelte/lazy'
+import { useTwZip6 } from '@simoko/tw-zip/solidjs/lazy'
+import { TwZip6LazyService } from '@simoko/tw-zip/angular/lazy'
 ```
 
 ## React
@@ -92,6 +97,56 @@ const {
   </template>
 </template>
 ```
+
+## Angular
+
+```typescript
+import { Component, OnInit, inject } from '@angular/core'
+import { TwZip6LazyService } from '@simoko/tw-zip/angular/lazy'
+
+@Component({
+  selector: 'app-address-form',
+  standalone: true,
+  imports: [CommonModule],
+  template: `
+    <div *ngIf="zip6.loading()">載入中...</div>
+    <ng-container *ngIf="!zip6.loading()">
+      <select [value]="zip6.city()" (change)="onCityChange($any($event.target).value)">
+        <option *ngFor="let c of zip6.cities()" [value]="c">{{ c }}</option>
+      </select>
+
+      <select [value]="zip6.area()" (change)="zip6.setArea($any($event.target).value)">
+        <option *ngFor="let a of zip6.areas()" [value]="a">{{ a }}</option>
+      </select>
+
+      <select [value]="zip6.road()" (change)="zip6.setRoad($any($event.target).value)">
+        <option *ngFor="let r of zip6.roads()" [value]="r">{{ r }}</option>
+      </select>
+
+      <input
+        type="number"
+        [value]="zip6.number() ?? ''"
+        (input)="zip6.setNumber($any($event.target).value ? +$any($event.target).value : undefined)"
+      />
+
+      <p>郵遞區號：{{ zip6.zipCode() }}</p>
+    </ng-container>
+  `,
+})
+export class AddressFormComponent implements OnInit {
+  readonly zip6 = inject(TwZip6LazyService)
+
+  ngOnInit() {
+    this.zip6.init()
+  }
+
+  onCityChange(value: string) {
+    this.zip6.setCity(value)
+  }
+}
+```
+
+> **注意**：Angular 版本需要在 `ngOnInit()` 中手動呼叫 `init()` 初始化服務。
 
 ## 選項
 

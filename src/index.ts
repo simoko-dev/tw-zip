@@ -1,3 +1,22 @@
+/**
+ * @module @simoko/tw-zip
+ * @description 台灣縣市、行政區、郵遞區號（3碼/6碼）查詢工具
+ *
+ * @example
+ * ```typescript
+ * import { getCityArray, getDistrictArray, getZipCode } from '@simoko/tw-zip'
+ *
+ * // 取得所有縣市
+ * const cities = getCityArray()
+ *
+ * // 取得行政區
+ * const districts = getDistrictArray('台北市')
+ *
+ * // 查詢郵遞區號
+ * const result = getZipCode('中正區')
+ * ```
+ */
+
 import rawData from './data'
 
 interface IDistrict {

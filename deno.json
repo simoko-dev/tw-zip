@@ -1,0 +1,31 @@
+{
+  "name": "@simoko/tw-zip",
+  "version": "1.1.0",
+  "description": "台灣縣市、行政區、郵遞區號（3碼/6碼）查詢工具，支援 React/Vue/Svelte/SolidJS/Angular",
+  "exports": {
+    ".": "./src/index.ts",
+    "./react": "./src/react/index.ts",
+    "./react/lazy": "./src/react/lazy.ts",
+    "./vue": "./src/vue/index.ts",
+    "./vue/lazy": "./src/vue/lazy.ts",
+    "./svelte": "./src/svelte/index.ts",
+    "./svelte/lazy": "./src/svelte/lazy.ts",
+    "./solidjs": "./src/solidjs/index.ts",
+    "./solidjs/lazy": "./src/solidjs/lazy.ts",
+    "./angular": "./src/angular/index.ts",
+    "./angular/lazy": "./src/angular/lazy.ts",
+    "./zip6": "./src/zip6/index.ts",
+    "./zip6/loader": "./src/zip6/loader.ts"
+  },
+  "publish": {
+    "include": [
+      "src/**/*.ts",
+      "README.md",
+      "LICENSE"
+    ],
+    "exclude": [
+      "src/**/*.test.ts",
+      "src/**/*.spec.ts"
+    ]
+  }
+}

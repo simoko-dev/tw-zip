@@ -28,7 +28,7 @@ function AddressForm() {
       </select>
 
       <select value={district} onChange={e => setDistrict(e.target.value)}>
-        {districts.map(d => <option key={d.label}>{d.label}</option>)}
+        {districts.map(d => <option key={d.label} value={d.label}>{d.label}</option>)}
       </select>
 
       <input value={zipCode} readOnly />
