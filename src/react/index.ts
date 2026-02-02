@@ -1,23 +1,39 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { getCityArray, getDistrictArray } from '../'
 
-export function useTwZip() {
-  const cities = getCityArray()
-  const [city, setCity] = useState<string>(cities[0])
-  const [districts, setDistricts] = useState(getDistrictArray(city))
-  const [district, setDistrict] = useState(districts[0].label)
-  const [zipCode, setZipCode] = useState(districts[0].value)
+export { useTwZip6 } from './useTwZip6'
+export type { SearchResult } from './useTwZip6'
 
+export function useTwZip() {
+  const cities = useMemo(() => getCityArray(), [])
+  const [city, setCity] = useState<string>(cities[0] ?? '')
+  const [districts, setDistricts] = useState(() => getDistrictArray(city))
+  const [district, setDistrictState] = useState(districts[0]?.label ?? '')
+  const [zipCode, setZipCodeState] = useState(districts[0]?.value ?? '')
+
+  // 當縣市改變時，更新行政區列表並重置選擇
   useEffect(() => {
     const ds = getDistrictArray(city)
     setDistricts(ds)
-    setDistrict(ds[0].label)
-    setZipCode(ds[0].value)
+    setDistrictState(ds[0]?.label ?? '')
+    setZipCodeState(ds[0]?.value ?? '')
   }, [city])
 
-  useEffect(() => {
-    setZipCode(districts.find(d => d.label === district)?.value || '')
-  }, [district])
+  // 根據行政區名稱設定郵遞區號
+  const setDistrict = useCallback((value: string) => {
+    setDistrictState(value)
+    const found = districts.find(d => d.label === value)
+    if (found)
+      setZipCodeState(found.value)
+  }, [districts])
+
+  // 根據郵遞區號設定行政區
+  const setZipCode = useCallback((value: string) => {
+    setZipCodeState(value)
+    const found = districts.find(d => d.value === value)
+    if (found)
+      setDistrictState(found.label)
+  }, [districts])
 
   return {
     cities,
@@ -27,5 +43,6 @@ export function useTwZip() {
     district,
     setDistrict,
     zipCode,
+    setZipCode,
   }
 }
